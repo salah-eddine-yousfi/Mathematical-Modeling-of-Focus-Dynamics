@@ -1,271 +1,64 @@
-# Mathematical Modeling of Focus Dynamics
-> **Written and edited by:** Salah Eddine YOUSFI  
-> **Date:** 05/02/2026
+# 🧪 From Vision to Reliable Temporal Signals
 
+This project focuses on **building reliable temporal signals from noisy visual predictions** using a rigorous and reproducible computer vision pipeline.
 
-Do not hesitate to contact me through my LinkedIn profile  
-
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?logo=linkedin&logoColor=white&style=for-the-badge)](https://www.linkedin.com/in/salah-eddine-yousfi-b2532a375/)
+Rather than relying on single-frame decisions, the goal is to **recover meaning over time** by transforming unstable model outputs into **smooth, interpretable signals**.
 
 ---
 
-# 🧠 From Real Images to a Credible Estimation of Human Concentration
+## 🔬 Methodological Focus
 
-This project explores a simple but challenging question:
+- Careful **dataset design** to avoid data leakage  
+- Strict **train / validation / test separation** using group-based splits  
+- Visual perception treated as a **multiclass problem**, not a shortcut binary task  
+- Temporal consistency handled **after inference**, not during training  
 
-> **Can human concentration be approximated from real images, without cheating on data or interpretation?**
-
-The goal is **not** to measure concentration perfectly,  
-but to propose a **coherent, interpretable and realistic methodology** that connects
-visual perception to a cognitive state over time.
-
----
-
-## 📸 1. Real Data, Fully Controlled
-
-The project is built on a **self-collected dataset**:
-
-- ≈ **2600 images**
-- 📸 captured **by myself**
-- under **real-world conditions**
-
-I deliberately introduced variability in:
-- fingernails,
-- clothing,
-- lighting conditions,
-- backgrounds.
-
-👉 **No synthetic or artificial data**  
-👉 Only real, imperfect, real-life images.
+This separation allows:
+- clean learning of visual features  
+- independent control of temporal behavior  
+- easy adaptation to new datasets  
 
 ---
 
-## 📦 2. Dataset Designed to Avoid an “Easy” (Cheating) Model
+## 🧠 Why This Matters
 
-High accuracy in vision can be misleading if the dataset is poorly split.
-To avoid this, the dataset was designed to be **strict and honest**:
+Single-frame predictions from vision models are often:
+- noisy  
+- unstable  
+- sensitive to lighting, pose, and motion  
 
-- private data,
-- ❌ **no image-by-image split**  
-  (which often shows almost identical images in train/val/test),
-- ✅ **group split by fingernail**.
+This project shows that:
 
-This guarantees that:
-- the same fingernail **never appears** in train, validation and test,
-- there is **no data leakage**,
-- the model cannot rely on memorization.
+> **Temporal structure can recover meaning where raw predictions fail.**
 
-👉 The model is **forced to generalize**.
-
----
-
-## 👁️ 3. Learning to See Before Judging
-
-The system does **not** start with a binary decision
-("concentrated / not concentrated").
-
-Instead, the neural network first learns **four visual classes**:
-
-- `focused_writing`
-- `focused_reading`
-- `not_phone`
-- `not_activity`
-
-👉 This produces a **rich and realistic visual perception**  
-👉 before any cognitive simplification.
+By accumulating evidence over time, predictions become:
+- more stable  
+- more interpretable  
+- closer to real-world behavior  
 
 ---
 
-## 🧠 4. Visual Model (Perception Only)
+## 🔁 Reusability & Adaptation
 
-The neural network is used **only for visual perception**:
+The framework is intentionally **generic**:
 
-- **Architecture**: ResNet-18
-- **Optimizer**: AdamW
-- **Transfer learning**: ImageNet pretrained weights
+- works with any image-based activity dataset  
+- supports custom class definitions  
+- compatible with different split strategies  
+- adaptable to other temporal signals beyond this use case  
 
-Overfitting is controlled using:
-- data augmentation (train only),
-- weight decay,
-- dropout,
-- best model selection via validation loss.
-
-### 📈 Performance on Unseen Data
-
-- **test accuracy = 87.65%**
-- strict test split by fingernail
-- new lighting, clothing and backgrounds
-
-👉 A **realistic performance**, not artificially inflated.
+Only the **data and configuration** need to change —  
+the core pipeline remains unchanged.
 
 ---
 
-## 🧠 5. From Visual Classes to Cognitive States
+## 🎯 Key Takeaway
 
-Once visual perception is obtained, classes are grouped conceptually:
+This project is not about maximizing accuracy on a single frame,  
+but about **designing a robust vision-to-time pipeline** that:
 
-- **1️⃣ = concentrated**
-  - focused_writing
-  - focused_reading
-- **0️⃣ = not concentrated**
-  - not_phone
-  - not_activity
+- avoids common experimental pitfalls  
+- respects temporal dynamics  
+- produces signals that remain meaningful beyond raw scores  
 
-This step bridges **vision** and **cognition**.
-
-However, a key issue appears immediately.
-
----
-
-## ❓ 6. Why Counting 0️⃣ / 1️⃣ Does Not Work
-
-Human concentration is:
-- not instantaneous,
-- not frame-by-frame,
-- not well described by isolated decisions.
-
-Examples:
-
-0 0 0 0 0 0 0 0 (1) 0 0 0 0 0 0 0 0
-                  → real concentration or noise?
-
-1 1 1 1 1 1 1 1 (0) 1 1 1 1 1 1 1 1                  
-                  → real loss of focus or a brief perturbation?
-
-
-👉 **Counting binary outputs has no cognitive meaning**.
-
----
-
-## 📐 7. Core Idea: Mathematical Evidence Accumulation (Not a Learned Model)
-
-To address this, the project uses **mathematical formulas**,  
-**not a trained model**, inspired by cognitive science.
-
-Reference:
-> **Normative Evidence Accumulation in Unpredictable Environments**  
-> Glaze et al., 2015
-
-This framework describes how a rational agent should:
-- **accumulate evidence over time**
-- instead of deciding from instantaneous observations
-- in noisy and unstable environments.
-
-### Important clarification
-
-- ❌ No neural network here
-- ❌ No learning
-- ❌ No backpropagation
-- ❌ No fitted weights
-
-✔ Only **explicit mathematical equations**  
-✔ Fully **interpretable parameters**
-
----
-
-## 🔢 How Evidence Accumulation Is Applied Here
-
-From the binary visual outputs (1 / 0):
-
-- each observation contributes **positive or negative evidence**,
-- evidence is **integrated over time**,
-- isolated contradictions are down-weighted,
-- decisions depend on a **continuous internal state**, not a single frame.
-
-Interpretation:
-- several **1️⃣ in a row** → concentration installs progressively
-- a single **0️⃣** → treated as noise
-- several **0️⃣ in a row** → gradual exit from concentration
-
-An intentional asymmetry is introduced:
-- ⬆️ entering concentration is slow,
-- ⬇️ leaving concentration is faster.
-
----
-
-## ⚠️ Parameter Choice (Scientific Honesty)
-
-All parameters:
-- are **chosen manually**,
-- inspired by the literature,
-- used as **pragmatic approximations**.
-
-This is necessary because:
-- concentration is a **latent cognitive state**,
-- it cannot be measured exactly,
-- images provide only **indirect evidence**.
-
----
-
-## 📈 8. Making Concentration Visible
-
-The mathematical accumulation produces interpretable signals:
-
-1. 📈 **Concentration curve** (continuous, between 0 and 1)
-2. 🍩 **Global concentration percentage**
-   - computed from the **surface above the threshold**
-   - not from counting frames
-3. 📊 **Time spent per cognitive activity**
-4. 📊 **Activity dominance curves**
-   - explain *why* concentration rises or falls
-
-👉 The result is not just a score,  
-👉 but an **explainable temporal behavior**.
-
----
-
-## ⚠️ 9. Scope and Limitations
-
-This approach remains an **approximation**.
-
-Limitations:
-- one subject,
-- limited data volume,
-- non-universal behavior.
-
-The model:
-- does **not** provide a universal truth,
-- does **not** generalize automatically to all people or contexts.
-
-👉 It provides a **context-dependent, interpretable estimate**.
-
----
-
-## 🎯 10. True Objective of the Project
-
-The objective is **not** to measure concentration perfectly.
-
-It is to demonstrate how to:
-- start from real visual data,
-- avoid common dataset pitfalls,
-- stabilize noisy predictions over time,
-- make a complex cognitive state observable.
-
-This framework is **adaptable**:
-- remote work monitoring,
-- online learning platforms,
-- other cognitive monitoring contexts,
-
-provided that:
-- new data is collected,
-- parameters are re-adjusted.
-
----
-
-### 🧩 Key Takeaway
-
-- Neural networks → **visual perception**
-- Mathematics → **cognitive temporal modeling**
-- No hidden learning
-- Full interpretability
-
-This project proposes a **methodology**, not a universal model.
-
----
-
-
-Please feel free to reach out to me through my LinkedIn Profile if you have any further questions or would like to discuss this study in more detail.
-
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?logo=linkedin&logoColor=white&style=for-the-badge)](https://www.linkedin.com/in/salah-eddine-yousfi-b2532a375/)
+👉 A solid foundation for real-world, time-aware computer vision systems.
