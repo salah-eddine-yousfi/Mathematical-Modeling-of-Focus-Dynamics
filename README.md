@@ -9,11 +9,6 @@ Do not hesitate to contact me through my LinkedIn profile
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?logo=linkedin&logoColor=white&style=for-the-badge)](https://www.linkedin.com/in/salah-eddine-yousfi-b2532a375/)
 
 ---
-<p align="center">
-  <a href="https://github.com/salah-eddine-yousfi/Mathematical-Modeling-of-Focus-Dynamics/blob/5b2680bf7d189f35ae5c5d59daacfe562ecd7cf7/Mathematical%20Modeling%20Of%20Focus%20Dynamics%20Video.mp4">
-    ▶️ <b>WATCH DEMO VIDEO</b>
-  </a>
-</p>
 
 # 🧠 From Real Images to a Credible Estimation of Human Concentration
 
